@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secretpassword
+    ports:
+      - "27017:27017"
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_HOST=mongodb
+      - MONGO_USER=admin
+      - MONGO_PASS=secretpassword
+    depends_on:
+      - mongodb
