@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-python-app-service
+spec:
+  type: NodePort
+  selector:
+    app: my-python-app
+  ports:
+    - protocol: TCP
+      port: 80         # We visit port 80
+      targetPort: 5000 # App listens on 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-app
+spec:
+  replicas: 2          # High Availability (2 copies)
+  selector:
+    matchLabels:
+      app: my-python-app
+  template:
+    metadata:
+      labels:
+        app: my-python-app
+    spec:
+      containers:
+      - name: my-python-app
+        image: jeet4949/my-python-app:v2  # <--- CHECK THIS USERNAME
+        ports:
+        - containerPort: 5000
+        env:
+        # 1. TELL APP WHERE THE DB IS
+        - name: MONGO_HOST
+          value: "mongodb"  # This matches the Service Name in mongo.yaml
+        
+        # 2. GET USERNAME FROM SECRET
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: mongo-root-username
+        
+        # 3. GET PASSWORD FROM SECRET
+        - name: MONGO_PASS
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: mongo-root-password
