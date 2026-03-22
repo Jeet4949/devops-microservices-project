@@ -16,7 +16,7 @@ todos = db.todos
 def home():
     todos.insert_one({'task': 'Visit Page'})
     count = todos.count_documents({})
-    return f"<h1>Hello! This page has been visited {count} times.</h1>"
+    return f"<h1>Hello from the Automated Cloud Pipeline! V2 {count} times.</h1>"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
