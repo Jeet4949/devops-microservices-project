@@ -44,7 +44,7 @@ data "aws_ami" "ubuntu" {
 # 4. Provision the EC2 Server
 resource "aws_instance" "web_server" {
   ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t2.micro" # Free-tier eligible!
+  instance_type          = "t3.micro" # Free-tier eligible!
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
   tags = {
