@@ -1,6 +1,5 @@
 name: Gemini AI Code Reviewer
 
-# Trigger this workflow whenever a PR is opened, updated, or reopened
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -10,7 +9,6 @@ jobs:
     name: Generate AI Feedback
     runs-on: ubuntu-latest
 
-    # Crucial: Give the workflow permission to write comments back to the PR
     permissions:
       contents: read
       pull_requests: write
@@ -21,7 +19,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Setup Python environment
+      # 2. Setup Python environment (FIXED HERE)
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
