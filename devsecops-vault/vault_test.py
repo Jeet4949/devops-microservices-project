@@ -16,6 +16,7 @@ else:
     print("❌ Vault connection failed. Check your token.")
     exit()
 
+
 # 3. Request the secret from the Vault
 print("Fetching database credentials securely...\n")
 try:
