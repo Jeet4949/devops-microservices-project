@@ -24,7 +24,7 @@ try:
     credentials = response['data']['data']
     username = credentials['username']
     password = credentials['password']
-    
+    password_check = "db_admin:SuperSecretPassword123"
     print("--- SECURE DATA INJECTED ---")
     print(f"Username: {username}")
     print(f"Password: {password}")
