@@ -56,7 +56,7 @@ THE CODE DIFF TO REVIEW:
 """
 
 # Call Gemini API directly via HTTP POST using the standard developer endpoint
-gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key={GEMINI_KEY}"
+gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={GEMINI_KEY}"
 gemini_payload = {
     "contents": [{
         "parts": [{"text": prompt}]
