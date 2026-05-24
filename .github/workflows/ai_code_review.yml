@@ -1,0 +1,42 @@
+name: Gemini AI Code Reviewer
+
+# Trigger this workflow whenever a PR is opened, updated, or reopened
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ai_review:
+    name: Generate AI Feedback
+    runs-on: ubuntu-latest
+
+    # Crucial: Give the workflow permission to write comments back to the PR
+    permissions:
+      contents: read
+      pull_requests: write
+      issues: write
+
+    steps:
+      # 1. Checkout the repository code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Setup Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # 3. Install required Python libraries
+      - name: Install Dependencies
+        run: |
+          pip install requests
+
+      # 4. Run the AI review script
+      - name: Run Gemini Reviewer Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          python scripts/ai_reviewer.py
