@@ -16,6 +16,7 @@ else:
     print("❌ Vault connection failed. Check your token.")
     exit()
 
+
 # 3. Request the secret from the Vault
 print("Fetching database credentials securely...\n")
 try:
@@ -24,7 +25,7 @@ try:
     credentials = response['data']['data']
     username = credentials['username']
     password = credentials['password']
-    
+    password_check = "db_admin:SuperSecretPassword123"
     print("--- SECURE DATA INJECTED ---")
     print(f"Username: {username}")
     print(f"Password: {password}")
